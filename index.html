@@ -8,17 +8,17 @@
 <title>فرداد راد | Fardad Rad</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{color-scheme:dark;--bg:#070a12;--surface:#101725;--surface2:#141f30;--text:#f3f7fc;--muted:#9aa9bc;--blue:#69aaff;--cyan:#69e4df;--line:rgba(160,190,230,.14)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:"Vazirmatn",Tahoma,sans-serif;overflow-x:hidden}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:"Readex Pro","Vazirmatn",Tahoma,sans-serif;overflow-x:hidden}
 body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 80% 0%,rgba(42,111,194,.2),transparent 38%),radial-gradient(ellipse at 0% 65%,rgba(25,167,173,.08),transparent 34%),linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:auto,auto,44px 44px,44px 44px;mask-image:linear-gradient(#000,transparent 92%)}
 a{color:inherit;text-decoration:none}.wrap{width:min(1080px,calc(100% - 38px));margin:auto}
-#intro{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:#060911;overflow:hidden;transition:opacity .85s ease,visibility .85s ease}
+#intro{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 48%,#10233b 0%,#080e1b 34%,#04060c 74%);overflow:hidden;transition:opacity 1s ease,visibility 1s ease}#intro:before{content:"";position:absolute;inset:-30%;background:conic-gradient(from 0deg,transparent 0 28%,#5ea9ff12 34%,transparent 42% 65%,#62e6df12 72%,transparent 80%);animation:spin 18s linear infinite}#intro:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,#ffffff08 0 1px,transparent 1px 4px);opacity:.18;pointer-events:none}
 #intro:before,#intro:after{content:"";position:absolute;width:min(78vw,570px);aspect-ratio:1;border:1px solid rgba(105,170,255,.2);border-radius:50%;animation:spin 12s linear infinite}
 #intro:after{width:min(57vw,410px);border-color:rgba(105,228,223,.2);animation-direction:reverse;animation-duration:17s}
 #intro.out{opacity:0;visibility:hidden}
-.intro-core{text-align:center;position:relative;z-index:1;animation:introRise 1s both}
+.intro-core{text-align:center;position:relative;z-index:1;animation:introRise 1.2s both}.intro-symbol{width:72px;height:72px;margin:0 auto 22px;border-radius:23px;display:grid;place-items:center;font-size:32px;font-weight:800;color:#06111c;background:linear-gradient(135deg,#75f0e2,#579cff);box-shadow:0 0 30px #57baff66,0 0 100px #398eff33;animation:emblem 2.8s ease-in-out infinite}.intro-overline{animation:letterIn 1s .25s both}.intro-name{animation:nameIn 1.15s .4s both}.intro-caption{letter-spacing:.02em}.intro-progress{width:min(250px,62vw);height:3px;margin:25px auto 0;background:#ffffff16;border-radius:9px;overflow:hidden}.intro-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--blue));box-shadow:0 0 15px var(--cyan);animation:loadbar 3.5s .2s forwards}
 .intro-overline{font-size:10px;letter-spacing:.42em;color:var(--cyan);direction:ltr}
 .intro-name{font-size:clamp(43px,12vw,86px);font-weight:900;letter-spacing:-.07em;direction:ltr;margin:8px 0;text-shadow:0 0 38px rgba(85,159,255,.35)}
 .intro-rule{height:2px;width:0;margin:15px auto;background:linear-gradient(90deg,transparent,var(--cyan),var(--blue),transparent);animation:rule 1s .45s forwards}
@@ -51,7 +51,7 @@ section{padding:58px 0;border-top:1px solid var(--line)}.section-head{display:fl
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.about-card{padding:18px;border-radius:15px;border:1px solid var(--line);background:#ffffff05}.about-card b{display:block;font-size:13px;margin-bottom:6px}.about-card p{font-size:11px;line-height:2;color:var(--muted);margin:0}
 footer{padding:25px 0 35px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:15px;color:var(--muted);font-size:10px}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s ease}.reveal.show{opacity:1;transform:none}
-@keyframes spin{to{transform:rotate(360deg)}}@keyframes introRise{from{opacity:0;transform:translateY(22px) scale(.96)}to{opacity:1;transform:none}}@keyframes rule{to{width:min(230px,60vw)}}@keyframes appear{to{opacity:1}}@keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(-1deg)}}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes portal{0%,100%{transform:scale(.9) rotate(-8deg);opacity:.55}50%{transform:scale(1.08) rotate(8deg);opacity:1}}@keyframes introRise{from{opacity:0;transform:translateY(22px) scale(.92);filter:blur(8px)}to{opacity:1;transform:none;filter:blur(0)}}@keyframes nameIn{from{opacity:0;letter-spacing:.22em;filter:blur(12px)}to{opacity:1;letter-spacing:-.07em;filter:blur(0)}}@keyframes letterIn{from{opacity:0;letter-spacing:.8em}to{opacity:1;letter-spacing:.42em}}@keyframes emblem{0%,100%{transform:translateY(0) rotate(-5deg);box-shadow:0 0 30px #57baff66,0 0 100px #398eff33}50%{transform:translateY(-9px) rotate(5deg);box-shadow:0 0 45px #57baff99,0 0 130px #398eff55}}@keyframes loadbar{to{width:100%}}@keyframes rule{to{width:min(230px,60vw)}}@keyframes appear{to{opacity:1}}@keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(-1deg)}}
 @media(max-width:760px){.wrap{width:min(100% - 30px,560px)}header{height:66px}nav{display:none}.status{font-size:9px}.hero{grid-template-columns:1fr;gap:5px;padding:54px 0 42px;min-height:unset}.hero-copy{text-align:center}.eyebrow{justify-content:center}h1{font-size:clamp(39px,11vw,57px);margin:13px 0}.lead{font-size:13px;margin:0 auto}.actions{justify-content:center}.visual{min-height:320px;margin-top:10px}.mock{width:min(91%,390px)}.label-a{left:0}.label-b{right:0}.section-head{display:block}.section-head p{margin-top:8px}.product{grid-template-columns:1fr;padding:21px}.product-art{grid-row:1;min-height:175px}.app-icon{width:116px;height:116px;font-size:47px;border-radius:29px}.app-orbit{width:160px;height:160px}.about-grid{grid-template-columns:1fr}.stats{justify-content:center;gap:30px}.stat strong{text-align:center}footer{flex-direction:column;text-align:center}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 </style>
@@ -62,7 +62,7 @@ footer{padding:25px 0 35px;border-top:1px solid var(--line);display:flex;justify
     <div class="intro-overline">WELCOME TO MY DIGITAL SPACE</div>
     <div class="intro-name">FARDAD RAD</div>
     <div class="intro-rule"></div>
-    <div class="intro-caption">طراحی ایده‌ها، ساخت تجربه‌های دیجیتال</div>
+    <div class="intro-caption">طراحی ایده‌ها، ساخت تجربه‌های دیجیتال</div>\n    <div class="intro-progress"><i></i></div>
   </div>
   <button class="skip" id="skipIntro">ورود به وب‌سایت ←</button>
 </div>
@@ -70,7 +70,7 @@ footer{padding:25px 0 35px;border-top:1px solid var(--line);display:flex;justify
 <div class="wrap">
 <header>
   <a class="brand" href="#" aria-label="صفحه اصلی"><span class="brand-icon">F</span><span>FARDAD RAD</span></a>
-  <nav><a href="#about">درباره من</a><a href="#product">محصول من</a><a href="https://github.com/Fardad990B" target="_blank" rel="noopener">گیت‌هاب ↗</a></nav>
+  <nav><a href="#about">درباره من</a><a href="#product">محصول من</a><a href="#ecosystem">خانواده یار تو</a><a href="#ideas">ارسال ایده</a><a href="https://github.com/Fardad990B" target="_blank" rel="noopener">گیت‌هاب ↗</a></nav>
   <span class="status">● در حال ساختن ایده‌های تازه</span>
 </header>
 <main>
@@ -107,6 +107,20 @@ footer{padding:25px 0 35px;border-top:1px solid var(--line);display:flex;justify
       <div class="actions"><a class="btn primary" href="https://github.com/Fardad990B" target="_blank" rel="noopener">پیگیری و دریافت اطلاعات ↗</a></div>
     </div>
     <div class="product-art"><div class="app-orbit"></div><div class="app-icon">ی</div></div>
+  </div>
+</section>
+<section id="ecosystem" class="reveal">
+  <div class="section-head"><div><div class="eyebrow">خانواده محصولات</div><h2>یک نام؛ چندین همراه</h2></div><p>یار تو فقط یک نرم‌افزار نیست؛ خانواده‌ای از ابزارهای کاربردی است که به‌مرور توسعه پیدا می‌کنند.</p></div>
+  <div class="product" style="grid-template-columns:1fr .8fr">
+    <div class="product-copy"><div class="product-label">THE YAR TO ECOSYSTEM</div><h3>به‌زودی؛ همراهان بیشتر</h3><p>«دخل و خرج» اولین عضو خانواده یار تو است. در ادامه، نرم‌افزارهای تازه‌ای با همین نام و هویت، برای ساده‌تر کردن کارهای روزمره معرفی خواهند شد.</p><div class="pills"><span class="pill">یار تو | دخل و خرج</span><span class="pill">محصولات آینده</span><span class="pill">در حال توسعه</span></div></div>
+    <div class="product-art"><div class="app-orbit"></div><div class="app-icon" style="font-size:31px;transform:rotate(-7deg)">YAR<br>TO</div></div>
+  </div>
+</section>
+<section id="ideas" class="reveal">
+  <div class="section-head"><div><div class="eyebrow">با هم بهترش می‌کنیم</div><h2>ایده‌ات رو بفرست</h2></div><p>پیشنهاد، قابلیت تازه یا حتی یک انتقاد سازنده داری؟ از طریق پیام‌رسان دلخواهت برام بفرست.</p></div>
+  <div class="about-grid">
+    <a class="about-card" href="https://splus.ir/M_990B" target="_blank" rel="noopener"><b>✦ ارسال ایده در سروش</b><p>شناسه: M_990B<br>برای ارسال پیشنهاد و بازخورد پیام بده.</p><span class="btn secondary" style="margin-top:14px">پیام در سروش ↗</span></a>
+    <a class="about-card" href="https://ble.ir/Fardad_990B" target="_blank" rel="noopener"><b>✦ ارسال ایده در بله</b><p>شناسه: Fardad_990B<br>ایده‌ات رو مستقیم ارسال کن.</p><span class="btn secondary" style="margin-top:14px">پیام در بله ↗</span></a>
   </div>
 </section>
 <section id="about" class="reveal">
