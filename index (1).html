@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070a12">
+<meta name="description" content="فرداد راد | طراح و توسعه‌دهنده وب و سازنده خانواده محصولات یار تو">
+<title>فرداد راد | Fardad Rad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700;800&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+/* ============================================================
+   متغیرها و پایه
+   ============================================================ */
+:root{
+  color-scheme:dark;
+  --bg:#070a12;
+  --surface:#101725;
+  --surface2:#142235;
+  --text:#f3f7fc;
+  --muted:#9aa9bc;
+  --blue:#69aaff;
+  --cyan:#69e4df;
+  --line:rgba(160,190,230,.14);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;min-height:100%;background:var(--bg);color:var(--text);font-family:"Readex Pro","Vazirmatn",Tahoma,sans-serif}
+/* clip به‌جای hidden: اسکرول عمودی سالم می‌ماند، افقی قطع می‌شود */
+body{overflow-x:clip}
+body.lock{overflow:hidden}
+
+body:before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 80% 0%,rgba(42,111,194,.2),transparent 38%),
+    radial-gradient(ellipse at 0% 65%,rgba(25,167,173,.08),transparent 34%),
+    linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+  background-size:auto,auto,44px 44px,44px 44px;
+  mask-image:linear-gradient(#000,transparent 92%);
+  -webkit-mask-image:linear-gradient(#000,transparent 92%);
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.wrap{width:min(1080px,calc(100% - 38px));margin:auto}
+
+/* ============================================================
+   انیمیشن ورود (Intro)
+   ============================================================ */
+#intro{
+  position:fixed;inset:0;z-index:90;display:grid;place-items:center;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 46%,#12263f 0%,#080f1d 38%,#03050a 78%);
+}
+#intro canvas{position:absolute;inset:0;display:block}
+.intro-veil{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 48%,rgba(105,228,223,.10),transparent 40%),
+    radial-gradient(circle at 50% 50%,transparent 56%,rgba(3,5,10,.86) 100%);
+}
+.intro-scan{
+  position:absolute;inset:0;pointer-events:none;opacity:.35;
+  background:repeating-linear-gradient(to bottom,rgba(255,255,255,.035) 0 1px,transparent 1px 3px);
+  animation:scan 9s linear infinite;
+}
+
+/* حلقه‌های مدار */
+.rings{position:absolute;width:min(88vw,620px);aspect-ratio:1;display:grid;place-items:center;pointer-events:none;animation:ringsIn 1.6s var(--ease) both}
+.r{position:absolute;border-radius:50%;border:1px solid rgba(105,170,255,.18);animation:spin linear infinite;will-change:transform;transform:translateZ(0)}
+.r1{inset:0;animation-duration:34s}
+.r2{inset:11%;border-style:dashed;border-color:rgba(105,228,223,.22);animation-duration:22s;animation-direction:reverse}
+.r3{inset:24%;border-color:rgba(118,190,255,.26);box-shadow:inset 0 0 60px rgba(59,139,255,.10);animation-duration:16s}
+.r4{inset:38%;border-color:rgba(105,228,223,.14);animation-duration:11s;animation-direction:reverse}
+
+/* کمان‌های نورانی چرخان */
+.arc{
+  position:absolute;inset:4%;border-radius:50%;will-change:transform;transform:translateZ(0);
+  background:conic-gradient(from 0deg,transparent 0 66%,rgba(105,228,223,.95) 87%,rgba(105,228,223,0) 95%);
+  -webkit-mask:radial-gradient(circle at 50% 50%,transparent 0 48.3%,#000 48.9%,#000 50%,transparent 50.6%);
+  mask:radial-gradient(circle at 50% 50%,transparent 0 48.3%,#000 48.9%,#000 50%,transparent 50.6%);
+  filter:drop-shadow(0 0 6px rgba(105,228,223,.55));
+  animation:spin 6s linear infinite;
+}
+.arc2{
+  inset:19%;animation-duration:9.5s;animation-direction:reverse;
+  background:conic-gradient(from 180deg,transparent 0 72%,rgba(118,175,255,.95) 90%,rgba(118,175,255,0) 97%);
+  filter:drop-shadow(0 0 6px rgba(118,175,255,.5));
+}
+
+/* نقاط در گردش */
+.orb{position:absolute;inset:0;animation:spin linear infinite;will-change:transform;transform:translateZ(0)}
+.orb:after{
+  content:"";position:absolute;top:-4px;left:50%;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;
+  background:var(--cyan);box-shadow:0 0 18px var(--cyan),0 0 44px rgba(105,228,223,.55);
+}
+.orb1{animation-duration:11s}
+.orb2{inset:17%;animation-duration:15s;animation-direction:reverse}
+.orb2:after{background:var(--blue);box-shadow:0 0 18px var(--blue),0 0 44px rgba(105,170,255,.5);width:7px;height:7px;margin-left:-3.5px}
+.orb3{inset:31%;animation-duration:8s}
+.orb3:after{width:5px;height:5px;margin-left:-2.5px;top:-2.5px;background:#eaf7ff;box-shadow:0 0 14px #9fdcff}
+
+.intro-core{text-align:center;position:relative;z-index:2}
+
+/* نماد FR */
+.emblem{position:relative;width:80px;height:80px;margin:0 auto 20px;display:grid;place-items:center;animation:emblemIn 1.15s var(--ease) both}
+.emblem-glow{
+  position:absolute;inset:-9px;border-radius:32px;filter:blur(7px);will-change:transform;
+  background:conic-gradient(from 0deg,transparent,rgba(125,243,228,.75),transparent 46%);
+  animation:spin 3.4s linear infinite;
+}
+.emblem-face{
+  position:relative;width:100%;height:100%;border-radius:25px;display:grid;place-items:center;
+  font-size:30px;font-weight:900;color:#06111c;direction:ltr;letter-spacing:.02em;
+  background:linear-gradient(135deg,#7ff3e4,#5a9dff);
+  box-shadow:0 0 34px rgba(87,186,255,.45),0 0 110px rgba(57,142,255,.2);
+  animation:emblemPulse 3.4s ease-in-out 1.2s infinite;
+}
+
+.intro-overline{font-size:10px;letter-spacing:.42em;color:var(--cyan);direction:ltr;min-height:15px;opacity:.95;animation:appear .6s .2s both}
+
+.intro-name{font-size:clamp(42px,12vw,88px);line-height:1.08;font-weight:900;letter-spacing:-.065em;direction:ltr;margin:10px 0 0;text-shadow:0 0 42px rgba(85,159,255,.35)}
+.intro-name b{display:inline-block;font-weight:900;animation:letterIn .95s var(--ease) both;animation-delay:calc(.5s + var(--i) * .055s)}
+.intro-name b.sp{width:.3em}
+.intro-name.glitch{animation:glitch .42s steps(3,end) 3}
+
+.intro-rule{height:2px;width:0;margin:16px auto;background:linear-gradient(90deg,transparent,var(--cyan),var(--blue),transparent);animation:rule 1.1s 1.05s forwards}
+.intro-caption{font-size:12px;color:#a9b8ca;opacity:0;animation:appear .8s 1.35s forwards}
+
+.intro-meter{display:flex;align-items:center;gap:11px;justify-content:center;margin:26px auto 0;width:min(270px,66vw);opacity:0;animation:appear .6s 1.5s forwards}
+.intro-progress{flex:1;height:3px;background:#ffffff1a;border-radius:9px;overflow:hidden}
+.intro-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--blue));box-shadow:0 0 15px var(--cyan)}
+.intro-pct{font-size:10px;color:#9fd9e4;direction:ltr;min-width:34px;text-align:left;font-variant-numeric:tabular-nums}
+
+.skip{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:3;background:#111a28cc;border:1px solid var(--line);color:#b8c8da;border-radius:30px;padding:9px 16px;font-size:11px;cursor:pointer;transition:.25s;opacity:0;animation:appear .6s 1.1s forwards}
+.skip:hover{color:var(--cyan);border-color:#69e4df55}
+
+.intro-flash{position:absolute;inset:0;opacity:0;pointer-events:none;background:radial-gradient(circle at 50% 48%,rgba(224,251,255,.95),rgba(120,200,255,.3) 22%,transparent 56%)}
+
+/* خروج */
+#intro.out{animation:introOut 1.1s cubic-bezier(.62,0,.2,1) forwards;pointer-events:none}
+#intro.out .intro-core{animation:coreOut .8s cubic-bezier(.62,0,.2,1) forwards}
+#intro.out .intro-flash{animation:flash .8s ease-out forwards}
+#intro.out .skip{opacity:0;transition:opacity .2s}
+.entered .wrap{animation:siteIn 1.15s var(--ease) both}
+
+/* ============================================================
+   هدر / ناوبری
+   ============================================================ */
+header{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:15px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;direction:ltr;white-space:nowrap}
+.brand-icon{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(140deg,var(--cyan),var(--blue));color:#07111b;font-weight:900}
+nav{display:flex;gap:7px;align-items:center}
+nav button{background:transparent;border:1px solid transparent;color:var(--muted);padding:10px 13px;border-radius:10px;font-size:12px;cursor:pointer;transition:.25s}
+nav button:hover,nav button.active{color:var(--cyan);background:#69e4df12;border-color:#69e4df28}
+.github{font-size:11px;border:1px solid var(--line);border-radius:10px;padding:9px 12px;white-space:nowrap}
+
+/* ============================================================
+   صفحات
+   ============================================================ */
+main{position:relative;min-height:calc(100svh - 119px)}
+.page{display:none;padding:58px 0 65px;animation:pageIn .65s cubic-bezier(.2,.7,.2,1) both}
+.page.active{display:flex;align-items:center;min-height:calc(100svh - 119px)}
+.page-inner{width:100%}
+
+.eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--cyan);font-size:11px}
+.eyebrow:before{content:"";width:22px;height:1px;background:var(--cyan)}
+h1{font-size:clamp(42px,6vw,70px);line-height:1.35;letter-spacing:-.045em;margin:17px 0;font-weight:900}
+h1 span{color:transparent;background:linear-gradient(100deg,#eafaff,#71dfe2 48%,#73aaff);background-clip:text;-webkit-background-clip:text}
+h2{font-size:clamp(30px,4vw,45px);margin:13px 0 17px;font-weight:800}
+.lead,.copy{font-size:14px;line-height:2.25;color:var(--muted);max-width:650px}
+
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:11px;padding:12px 18px;font-size:12px;font-weight:700;border:1px solid var(--line);transition:.25s;cursor:pointer;background:#ffffff06}
+.btn:hover{transform:translateY(-4px);filter:brightness(1.12);box-shadow:0 12px 30px #0005}
+.primary{background:linear-gradient(110deg,var(--cyan),var(--blue));color:#07111b;border:0;box-shadow:0 9px 28px rgba(66,153,239,.18)}
+
+/* ---------- خانه ---------- */
+#home{min-height:calc(100svh - 119px);padding:26px 0}
+.home{display:grid;grid-template-columns:1.08fr .92fr;gap:35px;align-items:center}
+.visual{min-height:410px;display:grid;place-items:center;position:relative;isolation:isolate}
+.visual:before{
+  content:"";position:absolute;width:85%;aspect-ratio:1;border-radius:50%;z-index:-1;
+  background:radial-gradient(circle,rgba(48,128,224,.23),transparent 68%);filter:blur(8px);
+  animation:glowPulse 7s ease-in-out infinite;
+}
+/* حلقه ثابت است؛ فقط نقطه‌ی مدار می‌چرخد (پایان لرزش لبه‌ی ۱ پیکسلی) */
+.ring{position:absolute;width:min(94%,380px);aspect-ratio:1;border:1px solid rgba(103,177,255,.16);border-radius:50%;pointer-events:none}
+.ring i{position:absolute;inset:0;border-radius:50%;animation:spin 30s linear infinite;will-change:transform;transform:translateZ(0)}
+.ring i:after{content:"";position:absolute;top:8%;left:50%;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:var(--cyan);box-shadow:0 0 20px var(--cyan)}
+
+/* چرخش ثابت روی پوسته، شناوری فقط translate3d روی کارت */
+.mock-tilt{width:min(100%,405px);transform:rotate(-3deg)}
+.mock{
+  width:100%;padding:12px;border:1px solid rgba(155,194,239,.24);border-radius:23px;
+  background:linear-gradient(145deg,rgba(32,48,69,.95),rgba(9,15,25,.98));
+  box-shadow:0 30px 85px #0009,0 0 45px rgba(52,137,230,.12);
+  animation:floatY 6s ease-in-out infinite;
+  will-change:transform;backface-visibility:hidden;
+}
+.mockbar{display:flex;justify-content:space-between;padding:4px 5px 12px;color:#a8b9cc;font-size:9px}
+.screen{min-height:250px;padding:17px;border-radius:14px;background:linear-gradient(145deg,#111e2e,#0a111c);border:1px solid #ffffff0c}
+.screen-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}
+.screen-title{font-size:13px;font-weight:800}
+.tag{font-size:9px;color:var(--cyan);background:#4dd0be16;padding:5px 8px;border-radius:20px}
+.balance{padding:16px;border-radius:12px;background:linear-gradient(115deg,#2d75c14d,#23b5b11f);border:1px solid #64b8e52e}
+.balance small,.tile small{font-size:9px;color:#a9c5df}
+.balance strong{display:block;font-size:25px;direction:ltr;text-align:right;margin-top:6px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}
+.tile{padding:12px;border-radius:10px;background:#ffffff08;border:1px solid #ffffff0c}
+.tile b{display:block;font-size:13px;margin-top:6px}
+.bars{height:58px;display:flex;align-items:end;gap:7px;padding:0 8px;margin-top:12px}
+.bars i{flex:1;border-radius:4px 4px 1px 1px;background:linear-gradient(to top,#398fe8,#69dfe0);transform-origin:bottom;animation:barWave 2.4s ease-in-out infinite alternate;will-change:transform}
+.bars i:nth-child(1){height:35%}
+.bars i:nth-child(2){height:60%;animation-delay:.2s}
+.bars i:nth-child(3){height:45%;animation-delay:.4s}
+.bars i:nth-child(4){height:78%;animation-delay:.6s}
+.bars i:nth-child(5){height:55%;animation-delay:.8s}
+.bars i:nth-child(6){height:92%;animation-delay:1s}
+.bars i:nth-child(7){height:70%;animation-delay:1.2s}
+
+/* بدون backdrop-filter: عامل اصلی لرزش در موبایل */
+.float-label{
+  position:absolute;padding:10px 13px;border-radius:11px;font-size:10px;color:#d3e8fa;
+  background:#101b2bf2;border:1px solid #7bbfff33;box-shadow:0 13px 32px #0006;
+  animation:bob 4.5s ease-in-out infinite;will-change:transform;backface-visibility:hidden;
+}
+.label-a{top:10%;left:0}
+.label-b{bottom:9%;right:0;animation-delay:1.3s}
+
+/* ---------- پنل‌ها ---------- */
+.panel{width:100%;padding:clamp(28px,5vw,55px);border:1px solid rgba(104,168,232,.2);border-radius:24px;background:linear-gradient(130deg,#152436ed,#0d131eef);box-shadow:0 30px 85px #0005;position:relative;overflow:hidden}
+.panel:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:#3197db1c;filter:blur(60px);left:-100px;bottom:-180px;pointer-events:none}
+.product-layout{display:grid;grid-template-columns:1fr .72fr;gap:30px;align-items:center}
+.product-copy{position:relative;z-index:1}
+.pills,.chips{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0}
+.pill,.chip{border:1px solid var(--line);border-radius:30px;padding:9px 13px;color:#d5e5f5;font-size:10px;background:#ffffff05}
+.product-art{display:grid;place-items:center;min-height:300px;position:relative}
+.app-icon{width:150px;height:150px;border-radius:36px;display:grid;place-items:center;background:linear-gradient(145deg,#70e5dc,#3b82ed);box-shadow:0 22px 60px #348fe54d;font-size:58px;color:#071522;font-weight:900;animation:floatIcon 5.5s ease-in-out infinite;will-change:transform}
+.app-orbit{position:absolute;width:220px;height:220px;border:1px solid #72c9ed2c;border-radius:50%}
+.app-orbit i{position:absolute;inset:0;border-radius:50%;animation:spin 18s linear infinite;will-change:transform}
+.app-orbit i:after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:var(--cyan);top:-4px;left:50%;margin-left:-4px;box-shadow:0 0 15px var(--cyan)}
+
+.about-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:30px}
+.about-card{padding:23px;border-radius:16px;border:1px solid var(--line);background:#ffffff06;transition:transform .3s,border-color .3s,background .3s}
+.about-card:hover{transform:translateY(-7px);border-color:#69e4df55;background:#69e4df0b}
+.about-card b{display:block;font-size:15px;margin-bottom:9px}
+.about-card p{font-size:12px;line-height:2.1;color:var(--muted);margin:0}
+
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px}
+.contact{display:block;border:1px solid var(--line);border-radius:17px;padding:24px;background:#ffffff06;transition:.3s}
+.contact:hover{transform:translateY(-7px);border-color:#69e4df66;box-shadow:0 20px 45px #0005}
+.contact b{display:block;font-size:17px;margin-bottom:10px}
+.contact span{display:block;color:var(--muted);font-size:12px;direction:ltr;text-align:right;overflow-wrap:anywhere}
+
+footer{height:43px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:10px}
+
+/* ============================================================
+   کی‌فریم‌ها
+   ============================================================ */
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes scan{to{background-position:0 300px}}
+@keyframes pageIn{from{opacity:0;transform:translateY(22px);filter:blur(5px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes ringsIn{from{opacity:0;transform:scale(.72)}to{opacity:1;transform:none}}
+@keyframes emblemIn{from{opacity:0;transform:translateY(26px) scale(.6) rotate(-18deg);filter:blur(10px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes emblemPulse{
+  0%,100%{transform:translateY(0);box-shadow:0 0 34px rgba(87,186,255,.45),0 0 110px rgba(57,142,255,.2)}
+  50%{transform:translateY(-8px);box-shadow:0 0 52px rgba(87,186,255,.8),0 0 140px rgba(57,142,255,.38)}
+}
+@keyframes letterIn{
+  0%{opacity:0;transform:translate3d(0,44px,0) scale(.84);filter:blur(13px)}
+  58%{opacity:1;filter:blur(0)}
+  100%{opacity:1;transform:none;filter:blur(0)}
+}
+@keyframes glitch{
+  0%,100%{text-shadow:0 0 42px rgba(85,159,255,.35);transform:none}
+  25%{text-shadow:-3px 0 rgba(255,86,122,.85),3px 0 rgba(105,228,223,.85),0 0 42px rgba(85,159,255,.35);transform:translate3d(1.5px,0,0)}
+  50%{text-shadow:0 0 42px rgba(85,159,255,.35);transform:none}
+  75%{text-shadow:3px 0 rgba(255,86,122,.8),-3px 0 rgba(105,228,223,.8),0 0 42px rgba(85,159,255,.35);transform:translate3d(-1.5px,0,0)}
+}
+@keyframes rule{to{width:min(240px,62vw)}}
+@keyframes appear{to{opacity:1}}
+@keyframes introOut{
+  0%{opacity:1;transform:scale(1);filter:blur(0)}
+  45%{opacity:.92}
+  100%{opacity:0;transform:scale(1.4);filter:blur(18px);visibility:hidden}
+}
+@keyframes coreOut{to{opacity:0;transform:translate3d(0,-26px,0) scale(1.14);filter:blur(11px)}}
+@keyframes flash{0%{opacity:0;transform:scale(.25)}20%{opacity:.9}100%{opacity:0;transform:scale(1.8)}}
+@keyframes siteIn{from{opacity:0;transform:scale(.966) translateY(12px);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
+/* فقط translate3d — بدون تغییر rotate در طول انیمیشن */
+@keyframes floatY{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-12px,0)}}
+@keyframes floatIcon{0%,100%{transform:rotate(8deg) translate3d(0,0,0)}50%{transform:rotate(8deg) translate3d(0,-12px,0)}}
+@keyframes bob{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-9px,0)}}
+@keyframes barWave{from{transform:scaleY(1);opacity:.82}to{transform:scaleY(.68);opacity:1}}
+@keyframes glowPulse{0%,100%{opacity:.75}50%{opacity:1}}
+
+/* ============================================================
+   موبایل — رفع لرزش و چرخش در صفحه خانه
+   ============================================================ */
+@media(max-width:760px){
+  .wrap{width:calc(100% - 30px)}
+  header{height:auto;min-height:68px;flex-wrap:wrap;padding:10px 0;gap:8px}
+  .brand{font-size:12px}
+  .brand-icon{width:30px;height:30px}
+  .github{font-size:10px;padding:8px}
+  nav{order:3;width:100%;justify-content:space-between;gap:2px}
+  nav button{font-size:10px;padding:9px 6px;flex:1}
+
+  main{min-height:calc(100svh - 150px)}
+  .page{padding:32px 0 40px}
+  .page.active{min-height:calc(100svh - 150px)}
+  /* بدون blur در انیمیشن ورود صفحه (منبع فلیکر در موبایل) */
+  @keyframes pageIn{from{opacity:0;transform:translate3d(0,18px,0)}to{opacity:1;transform:none}}
+
+  #home{min-height:calc(100svh - 150px);padding:10px 0}
+  .home{grid-template-columns:1fr;grid-template-rows:auto auto;gap:4px;text-align:center;align-content:center}
+  .home .eyebrow{justify-content:center}
+  h1{font-size:clamp(38px,10vw,55px);margin:13px 0}
+  .lead,.copy{font-size:13px;margin:0 auto;line-height:2}
+  .actions{justify-content:center;margin-top:18px}
+
+  .visual{min-height:0;height:clamp(196px,32svh,286px);margin-top:8px}
+  .mock-tilt{width:min(84%,336px);transform:rotate(-2deg)}
+  .mock{padding:9px;border-radius:19px}
+  .screen{min-height:0;padding:12px;border-radius:12px}
+  .bars{height:38px;margin-top:10px}
+  .balance{padding:12px}
+  .balance strong{font-size:21px}
+
+  /* توقف کامل حرکت‌های جابه‌جاکننده روی موبایل:
+     کارت، برچسب‌ها و حلقه ثابت می‌شوند — فقط نمودار نفس می‌کشد */
+  .mock,.float-label,.visual:before{animation:none}
+  .ring i{animation:none}
+  .ring{width:min(90%,330px)}
+
+  .panel{padding:26px 20px;border-radius:19px}
+  .panel h2{font-size:30px}
+  .product-layout{grid-template-columns:1fr;gap:6px}
+  .product-art{grid-row:1;min-height:190px}
+  .app-icon{width:116px;height:116px;font-size:47px;border-radius:29px;animation:none;transform:rotate(8deg)}
+  .app-orbit{width:165px;height:165px}
+  .app-orbit i{animation-duration:26s}
+  .about-grid,.contact-grid{grid-template-columns:1fr;gap:11px;margin-top:20px}
+  .about-card,.contact{padding:18px}
+  footer{font-size:9px}
+
+  .rings{width:min(94vw,520px)}
+  .intro-name{letter-spacing:-.05em}
+  .skip{bottom:22px}
+}
+
+@media(max-width:380px){
+  nav button{font-size:9px;padding:8px 4px}
+  .visual{height:clamp(176px,28svh,230px)}
+  .mock-tilt{width:min(88%,300px)}
+  .panel{padding:22px 16px}
+  .contact{padding:15px}
+}
+
+/* ============================================================
+   احترام به تنظیم کاهش حرکت
+   ============================================================ */
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{
+    animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important
+  }
+  .intro-progress i{width:100%!important}
+}
+</style>
+</head>
+<body class="lock">
+
+<!-- ================= انیمیشن ورود ================= -->
+<div id="intro" role="dialog" aria-label="معرفی فرداد راد">
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div class="intro-veil" aria-hidden="true"></div>
+  <div class="intro-scan" aria-hidden="true"></div>
+
+  <div class="rings" aria-hidden="true">
+    <i class="r r1"></i><i class="r r2"></i><i class="r r3"></i><i class="r r4"></i>
+    <i class="arc"></i><i class="arc arc2"></i>
+    <i class="orb orb1"></i><i class="orb orb2"></i><i class="orb orb3"></i>
+  </div>
+
+  <div class="intro-core">
+    <div class="emblem"><i class="emblem-glow"></i><span class="emblem-face">FR</span></div>
+    <div class="intro-overline" id="introScramble">WELCOME TO MY DIGITAL SPACE</div>
+    <h1 class="intro-name" id="introName" aria-label="FARDAD RAD">FARDAD RAD</h1>
+    <div class="intro-rule"></div>
+    <div class="intro-caption">طراحی ایده‌ها، ساخت تجربه‌های دیجیتال</div>
+    <div class="intro-meter">
+      <div class="intro-progress"><i id="introBar"></i></div>
+      <div class="intro-pct"><span id="introPct">0</span>%</div>
+    </div>
+  </div>
+
+  <button class="skip" id="skipIntro" type="button">ورود به وب‌سایت ←</button>
+  <div class="intro-flash" aria-hidden="true"></div>
+</div>
+
+<!-- ================= سایت ================= -->
+<div class="wrap">
+<header>
+  <a class="brand" href="#" data-page="home"><span class="brand-icon">F</span><span>FARDAD RAD</span></a>
+  <nav aria-label="منوی اصلی">
+    <button class="active" data-page="home">خانه</button>
+    <button data-page="product">محصول</button>
+    <button data-page="about">درباره من</button>
+    <button data-page="contact">ارتباط با من</button>
+  </nav>
+  <a class="github" href="https://github.com/Fardad990B" target="_blank" rel="noopener">GitHub ↗</a>
+</header>
+
+<main>
+
+<section class="page active" id="home">
+  <div class="page-inner home">
+    <div>
+      <div class="eyebrow">طراحی و توسعه وب</div>
+      <h1>سلام، من<br><span>فرداد راد</span> هستم.</h1>
+      <p class="lead">به فضای دیجیتال من خوش اومدی؛ جایی برای معرفی من، ایده‌هایی که دنبال می‌کنم و محصولاتی که با علاقه می‌سازم.</p>
+      <div class="actions">
+        <button class="btn primary" data-go="product">آشنایی با محصول یار تو ↓</button>
+        <button class="btn" data-go="contact">ارتباط با من</button>
+      </div>
+    </div>
+    <div class="visual">
+      <div class="ring"><i></i></div>
+      <div class="mock-tilt">
+        <div class="mock">
+          <div class="mockbar"><span>YAR TO · PERSONAL FINANCE</span><span>● ● ●</span></div>
+          <div class="screen">
+            <div class="screen-head"><span class="screen-title">نمای کلی حساب</span><span class="tag">داشبورد مالی</span></div>
+            <div class="balance"><small>مدیریت هوشمند دخل و خرج</small><strong>••••••••</strong></div>
+            <div class="tiles">
+              <div class="tile"><small>ثبت درآمد</small><b>＋ درآمدها</b></div>
+              <div class="tile"><small>ثبت هزینه</small><b>－ هزینه‌ها</b></div>
+            </div>
+            <div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+      </div>
+      <span class="float-label label-a">✦ ایده تا اجرا</span>
+      <span class="float-label label-b">یار تو · دخل و خرج</span>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="product">
+  <div class="page-inner panel product-layout">
+    <div class="product-copy">
+      <div class="eyebrow">محصول اصلی · YAR TO</div>
+      <h2>یار تو؛ دخل و خرج</h2>
+      <p class="copy">«یار تو» نرم‌افزار مدیریت دخل و خرج است؛ پروژه‌ای که با هدف ساده‌تر کردن ثبت و پیگیری امور مالی روزمره ساخته‌ام. این محصول برای اندروید و ویندوز ارائه شده است.</p>
+      <div class="pills"><span class="pill">مدیریت دخل و خرج</span><span class="pill">نسخه اندروید</span><span class="pill">نسخه ویندوز</span></div>
+      <div class="actions"><a class="btn primary" href="https://github.com/Fardad990B" target="_blank" rel="noopener">پیگیری محصول در گیت‌هاب ↗</a></div>
+    </div>
+    <div class="product-art">
+      <div class="app-orbit"><i></i></div>
+      <div class="app-icon">ی</div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="about">
+  <div class="page-inner panel">
+    <div class="eyebrow">کمی درباره من</div>
+    <h2>علاقه‌مند به ساختن</h2>
+    <p class="copy">من فرداد راد هستم؛ علاقه‌مند به طراحی و توسعه وب و ساخت ابزارهای دیجیتال. این وب‌سایت محل معرفی پروژه‌ها، تجربه‌ها و مسیر یادگیری من است؛ مسیری که با کنجکاوی، تمرین و تبدیل ایده‌ها به چیزهای واقعی پیش می‌رود.</p>
+    <div class="about-grid">
+      <article class="about-card"><b>طراحی و توسعه وب</b><p>علاقه‌مند به ساخت وب‌سایت‌های کاربردی، واکنش‌گرا و تجربه‌های ساده و خوش‌ساخت.</p></article>
+      <article class="about-card"><b>ساخت محصولات دیجیتال</b><p>از شکل‌گیری ایده تا طراحی و پیاده‌سازی؛ با تمرکز بر یادگیری و بهتر کردن هر نسخه.</p></article>
+    </div>
+    <div class="chips"><span class="chip">طراحی وب</span><span class="chip">توسعه نرم‌افزار</span><span class="chip">ساخت محصولات یار تو</span></div>
+  </div>
+</section>
+
+<section class="page" id="contact">
+  <div class="page-inner panel">
+    <div class="eyebrow">ارتباط مستقیم</div>
+    <h2>ارتباط با من</h2>
+    <p class="copy">برای گفتگو، پیشنهاد، ارسال ایده یا بازخورد می‌تونی از پیام‌رسان‌های زیر با من در ارتباط باشی.</p>
+    <div class="contact-grid">
+      <a class="contact" href="https://splus.ir/M_990B" target="_blank" rel="noopener"><b>✦ سروش</b><span>M_990B</span><span class="btn">ارسال پیام ↗</span></a>
+      <a class="contact" href="https://ble.ir/Fardad_990B" target="_blank" rel="noopener"><b>✦ بله</b><span>Fardad_990B</span><span class="btn">ارسال پیام ↗</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><span>© <span id="year"></span> Fardad Rad · ساخته‌شده با علاقه</span><span>YAR TO · محصولات دیجیتال</span></footer>
+</div>
+
+<script>
+/* ============================================================
+   1) انیمیشن ورود
+   ============================================================ */
+(() => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const intro   = document.getElementById('intro');
+  const bar     = document.getElementById('introBar');
+  const pctEl   = document.getElementById('introPct');
+  const nameEl  = document.getElementById('introName');
+  const scrEl   = document.getElementById('introScramble');
+  const skipBtn = document.getElementById('skipIntro');
+  const body    = document.body;
+  if (!intro) return;
+
+  /* ---- تقسیم نام به حروف برای ورود پله‌ای ---- */
+  const NAME = 'FARDAD RAD';
+  nameEl.textContent = '';
+  Array.from(NAME).forEach((ch, i) => {
+    const b = document.createElement('b');
+    b.style.setProperty('--i', i);
+    if (ch === ' ') { b.className = 'sp'; b.innerHTML = '&nbsp;'; }
+    else b.textContent = ch;
+    nameEl.appendChild(b);
+  });
+
+  /* ---- افکت گلیچ کوتاه روی نام ---- */
+  let glitchT1 = 0, glitchT2 = 0;
+  if (!reduce) {
+    glitchT1 = setTimeout(() => nameEl.classList.add('glitch'), 1500);
+    glitchT2 = setTimeout(() => nameEl.classList.remove('glitch'), 2700);
+  }
+
+  /* ---- رمزگشایی تدریجی خط بالایی ---- */
+  const TARGET = 'WELCOME TO MY DIGITAL SPACE';
+  const POOL   = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#*/<>·';
+  let shown = 0, frame = 0, scrTimer = 0;
+
+  function paintScramble() {
+    let out = '';
+    for (let i = 0; i < TARGET.length; i++) {
+      if (i < shown || TARGET[i] === ' ') out += TARGET[i];
+      else out += POOL[(Math.random() * POOL.length) | 0];
+    }
+    scrEl.textContent = out;
+  }
+  if (reduce) {
+    scrEl.textContent = TARGET;
+  } else {
+    paintScramble();
+    scrTimer = setInterval(() => {
+      frame++;
+      if (frame > 8) shown = Math.min(TARGET.length, shown + 1);
+      paintScramble();
+      if (shown >= TARGET.length) { clearInterval(scrTimer); scrTimer = 0; scrEl.textContent = TARGET; }
+    }, 55);
+  }
+
+  /* ---- میدان ستاره‌ای (Canvas) ---- */
+  const cv = document.getElementById('fx');
+  let ctx = null, raf = 0, stars = [], warp = 0;
+  let W = 0, H = 0, CX = 0, CY = 0, DPR = 1;
+
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = cv.width  = Math.max(1, Math.floor(window.innerWidth  * DPR));
+    H = cv.height = Math.max(1, Math.floor(window.innerHeight * DPR));
+    cv.style.width  = window.innerWidth  + 'px';
+    cv.style.height = window.innerHeight + 'px';
+    CX = W / 2; CY = H / 2;
+  }
+  function seed() {
+    const n = window.innerWidth < 760 ? 110 : 250;
+    stars = [];
+    for (let i = 0; i < n; i++) {
+      stars.push({
+        x: (Math.random() * 2 - 1) * W,
+        y: (Math.random() * 2 - 1) * H,
+        z: Math.random() * W + 1,
+        c: Math.random() < 0.55
+      });
+    }
+  }
+  function onResize() { resize(); seed(); }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    const step = (0.0024 + warp * 0.05) * W;
+    const k = W * 0.9;
+
+    for (let i = 0; i < stars.length; i++) {
+      const s = stars[i];
+      const pz = s.z;
+      s.z -= step;
+      if (s.z < 1) {
+        s.z = W;
+        s.x = (Math.random() * 2 - 1) * W;
+        s.y = (Math.random() * 2 - 1) * H;
+        continue;
+      }
+      const x = CX + s.x * k / s.z, y = CY + s.y * k / s.z;
+      if (x < -60 || x > W + 60 || y < -60 || y > H + 60) continue;
+      const px = CX + s.x * k / pz, py = CY + s.y * k / pz;
+      const d = 1 - s.z / W;
+      const a = 0.12 + d * 0.78;
+      ctx.strokeStyle = s.c
+        ? 'rgba(132,228,232,' + a + ')'
+        : 'rgba(122,176,255,' + a + ')';
+      ctx.lineWidth = Math.max(0.5 * DPR, d * 2.1 * DPR);
+      ctx.beginPath();
+      ctx.moveTo(px, py);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    }
+    if (warp > 0) warp = Math.min(1, warp + 0.05);
+    raf = requestAnimationFrame(draw);
+  }
+
+  if (!reduce && cv && cv.getContext) {
+    try {
+      ctx = cv.getContext('2d');
+      resize(); seed();
+      window.addEventListener('resize', onResize, { passive: true });
+      raf = requestAnimationFrame(draw);
+    } catch (e) { ctx = null; }
+  }
+
+  /* ---- شمارنده و خروج ---- */
+  const DUR = reduce ? 650 : 3500;
+  let done = false, t0 = null;
+
+  function cleanup() {
+    if (raf) { cancelAnimationFrame(raf); raf = 0; }
+    if (scrTimer) { clearInterval(scrTimer); scrTimer = 0; }
+    clearTimeout(glitchT1); clearTimeout(glitchT2);
+    window.removeEventListener('resize', onResize);
+    if (intro.parentNode) intro.parentNode.removeChild(intro);
+  }
+
+  function enter() {
+    if (done) return;
+    done = true;
+    warp = 0.02;                      /* شتاب ستاره‌ها در لحظه ورود */
+    intro.classList.add('out');
+    body.classList.remove('lock');
+    body.classList.add('entered');
+    setTimeout(cleanup, reduce ? 220 : 1150);
+  }
+
+  function tick(now) {
+    if (t0 === null) t0 = now;
+    const p = Math.min(1, (now - t0) / DUR);
+    const e = 1 - Math.pow(1 - p, 3);
+    bar.style.width = (e * 100).toFixed(1) + '%';
+    pctEl.textContent = Math.round(e * 100);
+    if (p < 1) requestAnimationFrame(tick);
+    else enter();
+  }
+  requestAnimationFrame(tick);
+
+  skipBtn.addEventListener('click', enter);
+  window.addEventListener('keydown', e => { if (e.key === 'Escape') enter(); });
+
+  /* شبکه محافظ: اگر چیزی در میانه خطا داد، سایت قفل نمی‌مانَد */
+  setTimeout(enter, DUR + 2500);
+})();
+
+/* ============================================================
+   2) ناوبری صفحات
+   ============================================================ */
+(() => {
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  const pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  const tabs  = Array.prototype.slice.call(document.querySelectorAll('[data-page]'));
+
+  function show(id) {
+    if (!pages.some(p => p.id === id)) return;
+    pages.forEach(p => p.classList.toggle('active', p.id === id));
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.page === id));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  tabs.forEach(t => t.addEventListener('click', e => { e.preventDefault(); show(t.dataset.page); }));
+  document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => show(b.dataset.go)));
+})();
+</script>
+</body>
+</html>
